@@ -1,18 +1,22 @@
 module Dashana
   class Panel
-    attr_accessor :targets, :span, :format, :maximum, :minimum, :title
+    attr_accessor :targets, :span, :format, :maximum, :minimum, :title,
+  :stacked, :fill, :overrides
     @@panel_idx = 0
     def initialize
       @targets = []
       @panel_idx = ( @@panel_idx += 1 )
       @span = 4
-      @format = ["percent", "short"]
+      @format = ["short"]
       @maximum = nil
       @minimum = nil
       @title = "New panel #{@panel_idx}"
+      @stacked = false
+      @overrides = []
+      @fill = 0
     end
     def to_hash
-      {"id"=>@@panel_idx,
+      {"id"=>@panel_idx,
         "span"=>@span,
         "type"=>"graph",
         "x-axis"=>true,
@@ -23,12 +27,12 @@ module Dashana
         {"max"=>nil, "min"=>nil, "leftMax"=>@maximum, "rightMax"=>nil, "leftMin"=>@minimum, "rightMin"=>nil, "threshold1"=>nil, "threshold2"=>nil, "threshold1Color"=>"rgba(216, 200, 27, 0.27)", "threshold2Color"=>"rgba(234, 112, 112, 0.22)"},
         "resolution"=>100,
         "lines"=>true,
-        "fill"=>1,
+        "fill"=>@fill,
         "linewidth"=>2,
         "points"=>false,
         "pointradius"=>5,
         "bars"=>false,
-        "stack"=>true,
+        "stack"=>@stacked,
         "spyable"=>true,
         "options"=>false,
         "legend"=>{"show"=>true, "values"=>false, "min"=>false, "max"=>false, "current"=>false, "total"=>false, "avg"=>false},
@@ -47,7 +51,7 @@ module Dashana
         "datasource"=>"influxdb",
         "renderer"=>"flot",
         "annotate"=>{"enable"=>false},
-        "seriesOverrides"=>[],
+        "seriesOverrides"=>@overrides,
         "leftYAxisLabel"=>""}
     end
   end

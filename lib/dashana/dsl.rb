@@ -41,12 +41,24 @@ module Dashana
       @panel.maximum = value
     end
 
+    def stacked value
+      @panel.stacked = value
+    end
+
     def format *args
       @panel.format = args
     end
 
     def target &block
       @panel.targets << TargetDsl.new(&block).target
+    end
+
+    def overrides value
+      @panel.overrides = value
+    end
+
+    def fill value
+      @panel.fill = value
     end
   end
 
