@@ -48,7 +48,8 @@ dash = dashana do
         title "deis-#{node_idx} load"
         span 3
         format "short"
-        maximum 20
+        #maximum 12
+        minimum 0
         fill 1
 
         serie_prefix = "deis-#{node_idx}.load/load"
@@ -70,6 +71,7 @@ dash = dashana do
         format "bytes"
         stacked true
         fill 1
+        minimum 0
 
         serie_prefix = "deis-#{node_idx}.memory/memory"
 
