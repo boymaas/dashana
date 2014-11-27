@@ -11,7 +11,10 @@ require 'dashana'
 
 include Dashana::Dsl
 
-dash = dashana do
+
+
+
+health_nodes = dashana do
   title "Health nodes"
 
   ["lb",1,2,3,"db","mon"].each do |node_idx|
