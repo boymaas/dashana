@@ -60,6 +60,14 @@ module Dashana
     def fill value
       @panel.fill = value
     end
+
+    def lines
+      @panel.lines
+    end
+
+    def bars
+      @panel.bars
+    end
   end
 
   class RowDsl

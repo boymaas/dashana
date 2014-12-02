@@ -14,7 +14,24 @@ module Dashana
       @stacked = false
       @overrides = []
       @fill = 0
+
+      @lines = true
+      @points = false
+      @bars = false
     end
+
+    def lines
+      @lines = true
+      @points = false
+      @bars = false
+    end
+
+    def bars
+      @lines = false
+      @bars = true
+      @points = false
+    end
+
     def to_hash
       {"id"=>@panel_idx,
         "span"=>@span,
@@ -26,12 +43,12 @@ module Dashana
         "grid"=>
         {"max"=>nil, "min"=>nil, "leftMax"=>@maximum, "rightMax"=>nil, "leftMin"=>@minimum, "rightMin"=>nil, "threshold1"=>nil, "threshold2"=>nil, "threshold1Color"=>"rgba(216, 200, 27, 0.27)", "threshold2Color"=>"rgba(234, 112, 112, 0.22)"},
         "resolution"=>100,
-        "lines"=>true,
+        "lines"=>@lines,
         "fill"=>@fill,
         "linewidth"=>2,
-        "points"=>false,
+        "points"=>@points,
         "pointradius"=>5,
-        "bars"=>false,
+        "bars"=>@bars,
         "stack"=>@stacked,
         "spyable"=>true,
         "options"=>false,
